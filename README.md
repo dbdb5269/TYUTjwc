@@ -10,6 +10,6 @@ urllib2.install_opener(opener)
 
 ###~~The second way session~~
 ```python
-~~s=requests.Session()~~
-~~Post=s.post(loginUrl,headers=headers,data=datas)~~
+s=requests.Session()
+Post=s.post(loginUrl,headers=headers,data=datas)
 ```
