@@ -2,9 +2,6 @@
 #coding=UTF-8
 import urllib
 import urllib2
-import json
-import cookielib
-import re
 import requests
 dalidateCodeUrl="http://202.207.247.49/validateCodeAction.do"
 loginUrl="http://202.207.247.49/loginAction.do"
@@ -19,10 +16,14 @@ headers = {
     'Upgrade-Insecure-Requests': '1',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36'
 }
+s=requests.Session()
 def downValidateCode():
 
-    req = urllib2.urlopen(dalidateCodeUrl)
-    content = req.read()
+
+
+    req=s.get(dalidateCodeUrl)
+
+    content = req.content
     f=open('./validate/'+'validate'+'.jpg','w+')
     f.write(content)
     print '验证码下载完成'
@@ -39,14 +40,24 @@ datas = {
     'mm':mm,
     'v_yzm': validate
 }
+post_data=urllib.urlencode(datas)
+
 try:
-    s=requests.Session()
-    Post=s.post(loginUrl,headers=headers,data=datas)
-    print Post.status_codes
 
-
-
-
+    Response = s.get(loginUrl, headers=headers, data=post_data)
+    code = Response.content.decode('GBK')
+    print code
+#
+#
+#     # if(code==200):
+#     #     info_url="http://202.207.247.49/xjInfoAction.do?oper=xjxx"
+#     #     info_response=s.post(info_url).text
+#     #     print info_response
+#
+#
+#
+#
+#
 except urllib2.HTTPError, e:
     print e.getcode()
     print e.reason

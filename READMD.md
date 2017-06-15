@@ -8,8 +8,8 @@ opener=urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 urllib2.install_opener(opener)
 ```
 
-###The second way session
+###~~The second way session~~
 ```python
-s=requests.Session()
-Post=s.post(loginUrl,headers=headers,data=datas)
+~~s=requests.Session()~~
+~~Post=s.post(loginUrl,headers=headers,data=datas)~~
 ```
